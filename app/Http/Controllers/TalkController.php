@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\TalkType;
+use App\Http\Requests\CreateTalkRequest;
+use App\Http\Requests\UpdateTalkRequest;
 use App\Models\Talk;
-use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Rule;
 
 class TalkController extends Controller
 {
@@ -30,18 +28,10 @@ class TalkController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CreateTalkRequest $request)
     {
-        $validated = $request->validate([
-            'title' => 'required|max:255',
-            'length' => 'required',
-            'type' => ['required', Rule::enum(TalkType::class)],
-            'abstract' => '',
-            'organizer_notes' => '',
-        ]);
-
         // Create talk
-        Auth::user()->talks()->create($validated);
+        Auth::user()->talks()->create($request->validated());
 
         return redirect()->route('talks.index');
     }
@@ -51,9 +41,6 @@ class TalkController extends Controller
      */
     public function show(Talk $talk)
     {
-        if ($talk->author->id !== Auth::user()->id) {
-            abort(403);
-        }
         return view('talks.show', ['talk' => $talk]);
     }
 
@@ -68,21 +55,9 @@ class TalkController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Talk $talk)
+    public function update(UpdateTalkRequest $request, Talk $talk)
     {
-        if ($talk->author->id !== Auth::user()->id) {
-            abort(403);
-        }
-
-        $validated = $request->validate([
-            'title' => 'required|max:255',
-            'length' => '',
-            'type' => ['required', Rule::enum(TalkType::class)],
-            'abstract' => '',
-            'organizer_notes' => '',
-        ]);
-
-        $talk->update($validated);
+        $talk->update($request->validated());
 
         return redirect()->route('talks.show', ['talk' => $talk]);
     }
