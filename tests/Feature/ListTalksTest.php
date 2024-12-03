@@ -31,7 +31,7 @@ test('it shows basic talks details on the talk show page', function () {
     $response->assertOk();
 });
 
-test('users cant see the4 talk show page for other talks', function() {
+test('users cant see the4 talk show page for other talks', function () {
     $talk = Talk::factory()->create();
     $otherUser = User::factory()->create();
 
