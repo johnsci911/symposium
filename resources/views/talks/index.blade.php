@@ -10,6 +10,10 @@
             <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <ul class="list-disc pl-4">
+                        <div class="mb-4 font-bold">
+                            <a href="{{ route('talks.create') }}">Add new talk</a>
+                        </div>
+
                         @foreach ($talks as $talk)
                             <li><a class="font-bold hover:underline" href="{{ route('talks.show', ['talk' => $talk]) }}">{{ $talk->title }}</a> ({{ $talk->type }} \ {{ $talk->length }})</li>
                         @endforeach

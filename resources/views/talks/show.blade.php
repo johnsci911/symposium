@@ -11,9 +11,10 @@
                 <div class="p-6 text-gray-900">
                     {{ $talk->abstract }} <br><br>
                     {{ $talk->organizer_notes }}
-                    <x-delete-item :route="route('talks.destroy', ['talk' => $talk])" text="Delete this talk" />
-                    <br>
-                    <a href="{{ route('talks.edit', ['talk' => $talk]) }}">Edit</a>
+                    <div class="flex flex-row space-x-2 font-bold mt-4 text-sm">
+                        <a href="{{ route('talks.edit', ['talk' => $talk]) }}">Edit</a>
+                        <x-delete-item :route="route('talks.destroy', ['talk' => $talk])" text="Delete this talk" />
+                    </div>
                 </div>
             </div>
         </div>
