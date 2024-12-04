@@ -18,6 +18,6 @@ test('a user can create a talk', function () {
         ->assertRedirect(route('talks.index'));
 
     $this->assertDatabaseHas('talks', [
-        'title' => $title
+        'title' => $title,
     ]);
 });

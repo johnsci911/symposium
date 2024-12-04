@@ -8,7 +8,7 @@ test('it imports a conference', function () {
 
     $data = [
         'name' => 'This is the new name from the API',
-        '_rel' => ['cfp_uri' => 'v1/cfp/o1i34ion124io4n1']
+        '_rel' => ['cfp_uri' => 'v1/cfp/o1i34ion124io4n1'],
     ];
 
     $command->importOrUpdateConference($data);
@@ -29,7 +29,7 @@ test('it updates a conference', function () {
 
     $data = [
         'name' => 'This is the name from the API',
-        '_rel' => ['cfp_uri' => 'v1/cfp/o1i34ion124io4n1']
+        '_rel' => ['cfp_uri' => 'v1/cfp/o1i34ion124io4n1'],
     ];
 
     $command->importOrUpdateConference($data);
